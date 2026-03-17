@@ -1,0 +1,62 @@
+[
+  {
+    "name": "__RequestVerificationToken_L2ZzYQ2",
+    "value": "9MXs6ZKaXYRsJzzdv1LSkCy4J9YBkStBembzc0XRaouX3DM2lxA5K_HqFwO7sGQ3BOY4uX_jB4Z65tA0dJ1NaPiHtoTuvualYaKuhx4o3301",
+    "domain": "www.fsa-platforma.gr",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": ".AspNet.ApplicationCookie",
+    "value": "rLRDbz6CtJUQsEhrpC0rGZljdfoiw5B9FiOSCWKSVVgKCUMcNkAnBzLvai8dbjWETrfgBpgQapcG2n7womZvyutNHjVHctRBtRNYwM9HLWVXHL78QLX9ZWY_an9Mo7kRIdYOiUtzhWHlImP8B7Qy8r675Ia9aa9RXvUu0QT8czApnzoR-DLJZWJUugHFVhh_kyHQGTZ5tXr_F9mDI3Dcwf10t7Sdz0Bxg449HOzTiokP2tJNFa-IHtTn9cyQZH7II7er8rdXL2n_XGyBgNCZRQDB4NZ5bZg2AVaNdC1VbBLxCVnXwcnLu72KBcJGgZ4Bktc3UoRhD7w_dwp_JnP-deAS3UdvXhPo2v3uR10jfIucvGrRRg6ctg86ppHG0wsLKUQC4YOTxqnhcWwuef-oTdLVDjhRuQgsrKkNwTdIcpNa32RAP-A-tliLTwTyi0PqHE1JaVrsygOAfACBPF2zntDm9Hc9ubnbcNHaCi97WS7t5WI_bkFbF7vRGpJvZA45",
+    "domain": "www.fsa-platforma.gr",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": ".AspNetCore.Cookies",
+    "value": "CfDJ8IjBCdtLVK9LrUcvTfPHUWYSboPpX9BGJ4tMIJw670akfliH50jRX4LY3DCORL-AneFhZeRtUsC8wmRPGBILdfJxSkYIfVoXzTJAj9LU18T4heWpGqXTujeMaFO6sCW1NWo2zyKBrNHvzLxFuDSQ8gUN5Cyv-F2-wtjo3yHMZUVG_IQcY4YttGI12zizZQ-TYbd-QqTb247iXuoy-TvX9tvLpUrfQ7NFYII8hPpN9bKQ0AXRY5KF8D0zsSqQlnc6IjtCCukJoPK9y6i42Ys-TQH1U2nQ3V6kqymhwQUul92ixEDn9hISLE9zIijo4hUvix7DpQsBf21gsjrp2O-IjCumonK2oiW9LVFrpzvHScyllfXkLjRvwPaVF1FWyfsf3YaPNaMOoV3kEtptQZ-BbbIc3PisYcyOpqZzVExQELcXw0iL10Bhsf1rdmTvkIeCOGpspGunGatTUrE00GsA0gnVgtvTjBR076Wou2Z-epk7T5IAOn8AhmTSdQxbXTdub34SHKQU1oJg7W5k9BOfMIOsiPs26QK7gDdL-xki58jA32rwin3oV_54VJ_09iYGj9_ztOaJlnGZaU-_7FT5gkXlH-fhW64tNaWdk08W6b8V",
+    "domain": "fsa-efimeries.gr",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ga",
+    "value": "GA1.1.1667962098.1773787307",
+    "domain": ".fsa-efimeries.gr",
+    "path": "/",
+    "expires": 1808347312.544895,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": ".AspNetCore.Antiforgery._7w_lBqvcBI",
+    "value": "CfDJ8IjBCdtLVK9LrUcvTfPHUWYgBMiNnzPVApuhPLQmYde3TSV_7TIAWdNKznPyhIh72pke2ZYqwJ_PuR872jKfFcock698xkKvDvoTfg7-lZc6SQODswvP6kkO9qugAckMaXcDZVuLX47LBhvrUXKzKE4",
+    "domain": "fsa-efimeries.gr",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Strict"
+  },
+  {
+    "name": "_ga_W8MT7PMKDL",
+    "value": "GS2.1.s1773787307$o1$g1$t1773787312$j55$l0$h0",
+    "domain": ".fsa-efimeries.gr",
+    "path": "/",
+    "expires": 1808347312.61164,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  }
+]

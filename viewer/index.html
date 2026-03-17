@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pharmacy Duties</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --fg: #18304b;
+      --muted: #356f55;
+      --line: #d4ddd4;
+      --accent: #058400;
+      --row-alt: #eef8f0;
+      --header-black: #050505;
+      --header-green: #048600;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    #viewer {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      background: #fff;
+      padding: 14px 15px 10px;
+    }
+
+    #header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 8px 0 12px;
+    }
+
+    #brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    #logo {
+      flex: 0 0 122px;
+      width: 122px;
+      height: 122px;
+      object-fit: contain;
+    }
+
+    #titles {
+      min-width: 0;
+    }
+
+    #org {
+      color: #31954a;
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+
+    #title {
+      color: #31954a;
+      font-size: 34px;
+      font-weight: 500;
+      line-height: 1.1;
+      margin-top: 3px;
+    }
+
+    #meta {
+      color: #31954a;
+      font-size: 52px;
+      font-weight: 500;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    #entries {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .section-block {
+      min-height: 0;
+    }
+
+    .section-title {
+      background: var(--header-green);
+      color: #fff;
+      text-align: center;
+      font-size: 40px;
+      font-weight: 500;
+      line-height: 1.1;
+      padding: 8px 12px 10px;
+      text-transform: uppercase;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: 1.06fr 2.45fr 2.28fr 0.9fr 0.58fr;
+      align-items: center;
+    }
+
+    .column-header {
+      min-width: 0;
+      background: var(--header-black);
+      color: #fff;
+      font-size: 30px;
+      font-weight: 700;
+      text-align: center;
+      padding: 3px 4px 4px;
+      border-right: 1px solid #8b8b8b;
+    }
+
+    .column-header:last-child {
+      border-right: 0;
+    }
+
+    .walk-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 34px;
+      vertical-align: middle;
+    }
+
+    .walk-icon img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .entry {
+      display: grid;
+      grid-template-columns: 1.06fr 2.45fr 2.28fr 0.9fr 0.58fr;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .entry:nth-child(even) {
+      background: var(--row-alt);
+    }
+
+    .cell {
+      min-width: 0;
+      padding: 4px 4px;
+      border-right: 1px solid var(--line);
+    }
+
+    .cell:last-child {
+      border-right: 0;
+    }
+
+    .value {
+      display: block;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.1;
+      word-break: break-word;
+      text-transform: uppercase;
+    }
+
+    .value.pharmacy {
+      font-size: 26px;
+    }
+
+    .value.phone {
+      text-align: center;
+    }
+
+    .value.distance {
+      font-size: 26px;
+      font-weight: 500;
+      text-align: center;
+      text-transform: none;
+      white-space: nowrap;
+    }
+
+    .value.mixed {
+      text-transform: none;
+    }
+
+    .page-indicator {
+      margin-top: 6px;
+      color: #5f755f;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    #empty {
+      display: none;
+      place-items: center;
+      height: 100vh;
+      font-size: 56px;
+      color: var(--muted);
+    }
+
+    #measure {
+      position: fixed;
+      left: -10000px;
+      top: 0;
+      visibility: hidden;
+      pointer-events: none;
+      contain: layout style;
+    }
+  </style>
+</head>
+<body>
+  <main id="viewer">
+    <header id="header">
+      <div id="brand">
+        <img id="logo" src="file:///home/niklyk1/pharmacy-display/viewer/assets/FSA-logo-NB.png" alt="Φαρμακευτικός Σύλλογος Αττικής">
+        <div id="titles">
+          <div id="org">ΦΑΡΜΑΚΕΥΤΙΚΟΣ ΣΥΛΛΟΓΟΣ ΑΤΤΙΚΗΣ</div>
+          <div id="title">Εφημερεύοντα Φαρμακεία</div>
+        </div>
+      </div>
+      <div id="meta"></div>
+    </header>
+    <section id="entries"></section>
+  </main>
+  <div id="empty">No duties available</div>
+  <div id="measure"></div>
+  <script>
+    const refreshMs = 5 * 60 * 1000;
+    const rotateMs = 25 * 1000;
+    const dataUrl = "file:///home/niklyk1/pharmacy-display/data/viewer_data.json";
+    const entriesEl = document.getElementById("entries");
+    const metaEl = document.getElementById("meta");
+    const viewerEl = document.getElementById("viewer");
+    const emptyEl = document.getElementById("empty");
+    const measureEl = document.getElementById("measure");
+    let payload = null;
+    let currentPage = 0;
+    let rotationTimer = null;
+    let refreshToken = 0;
+    let resizeTimer = null;
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function renderColumns() {
+      return `
+        <div class="columns">
+          <div class="column-header">Περιοχή</div>
+          <div class="column-header">Διεύθυνση</div>
+          <div class="column-header">Φαρμακείο</div>
+          <div class="column-header">Τηλέφωνο</div>
+          <div class="column-header">
+            <span class="walk-icon" aria-hidden="true">
+              <img src="file:///home/niklyk1/pharmacy-display/viewer/assets/Distance-logo-NB.png" alt="">
+            </span>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderEntry(entry) {
+      return `
+        <article class="entry">
+          <div class="cell"><span class="value">${escapeHtml(entry.area || "")}</span></div>
+          <div class="cell"><span class="value">${escapeHtml(entry.address || "")}</span></div>
+          <div class="cell"><span class="value pharmacy mixed">${escapeHtml(entry.pharmacy || "")}</span></div>
+          <div class="cell"><span class="value phone">${escapeHtml(entry.phone || "")}</span></div>
+          <div class="cell"><span class="value distance">${escapeHtml(entry.distance || "")}</span></div>
+        </article>
+      `;
+    }
+
+    function measureHeight(html, className = "") {
+      measureEl.style.width = `${entriesEl.clientWidth || viewerEl.clientWidth || window.innerWidth}px`;
+      measureEl.innerHTML = `<div class="${className}">${html}</div>`;
+      return Math.ceil(measureEl.firstElementChild?.getBoundingClientRect().height || 0);
+    }
+
+    function getLayoutMetrics(entries) {
+      const gap = Number.parseFloat(window.getComputedStyle(entriesEl).gap || "0") || 0;
+      const pageIndicatorHeight = measureHeight('<div class="page-indicator">1/1</div>');
+      const sectionChromeCache = new Map();
+      const entryHeightCache = new Map();
+
+      function getSectionChromeHeight(section) {
+        if (!sectionChromeCache.has(section)) {
+          const height = measureHeight(
+            `<section class="section-block">
+              <div class="section-title">${escapeHtml(section || "")}</div>
+              ${renderColumns()}
+            </section>`
+          );
+          sectionChromeCache.set(section, height);
+        }
+        return sectionChromeCache.get(section);
+      }
+
+      function getEntryHeight(entry) {
+        const key = JSON.stringify(entry);
+        if (!entryHeightCache.has(key)) {
+          entryHeightCache.set(key, measureHeight(renderEntry(entry)));
+        }
+        return entryHeightCache.get(key);
+      }
+
+      return {
+        availableHeight: Math.max(0, entriesEl.clientHeight - pageIndicatorHeight - gap),
+        gap,
+        getSectionChromeHeight,
+        getEntryHeight,
+      };
+    }
+
+    function parseDistanceMeters(distance) {
+      const text = String(distance || "").trim().toLowerCase();
+      if (!text) {
+        return Number.POSITIVE_INFINITY;
+      }
+
+      const normalized = text.replace(",", ".");
+      const match = normalized.match(/(\d+(?:\.\d+)?)/);
+      if (!match) {
+        return Number.POSITIVE_INFINITY;
+      }
+
+      const value = Number.parseFloat(match[1]);
+      if (Number.isNaN(value)) {
+        return Number.POSITIVE_INFINITY;
+      }
+
+      if (normalized.includes("χλμ")) {
+        return value * 1000;
+      }
+
+      return value;
+    }
+
+    function sortEntriesBySectionAndDistance(entries) {
+      const sectionOrder = [];
+      const grouped = new Map();
+
+      for (const entry of entries) {
+        const section = entry.section || "";
+        if (!grouped.has(section)) {
+          grouped.set(section, []);
+          sectionOrder.push(section);
+        }
+        grouped.get(section).push(entry);
+      }
+
+      const sortedEntries = [];
+      for (const section of sectionOrder) {
+        const sectionEntries = grouped.get(section) || [];
+        sectionEntries.sort((left, right) => {
+          return parseDistanceMeters(left.distance) - parseDistanceMeters(right.distance);
+        });
+        sortedEntries.push(...sectionEntries);
+      }
+
+      return sortedEntries;
+    }
+
+    function groupBySection(entries) {
+      const groups = [];
+      for (const entry of entries) {
+        const section = entry.section || "";
+        const lastGroup = groups[groups.length - 1];
+        if (lastGroup && lastGroup.section === section) {
+          lastGroup.entries.push(entry);
+        } else {
+          groups.push({ section, entries: [entry] });
+        }
+      }
+      return groups;
+    }
+
+    function pageChunks(entries) {
+      const sectionGroups = groupBySection(entries);
+      const pages = [];
+      const metrics = getLayoutMetrics(entries);
+      let currentPage = [];
+      let currentHeight = 0;
+
+      function flushPage() {
+        if (currentPage.length) {
+          pages.push(currentPage);
+          currentPage = [];
+          currentHeight = 0;
+        }
+      }
+
+      for (const group of sectionGroups) {
+        let sectionStartedOnPage = false;
+        let sectionIndexOnPage = 0;
+
+        for (const entry of group.entries) {
+          const entryHeight = metrics.getEntryHeight(entry);
+          const sectionChromeHeight = sectionStartedOnPage ? 0 : metrics.getSectionChromeHeight(group.section);
+          const sectionGap = sectionStartedOnPage || currentPage.length === 0 ? 0 : metrics.gap;
+          const requiredHeight = sectionGap + sectionChromeHeight + entryHeight;
+          const fitsOnPage = currentHeight + requiredHeight <= metrics.availableHeight;
+
+          if (!fitsOnPage && currentPage.length) {
+            flushPage();
+            sectionStartedOnPage = false;
+            sectionIndexOnPage = 0;
+          }
+
+          const nextSectionGap = sectionStartedOnPage || currentPage.length === 0 ? 0 : metrics.gap;
+          const nextSectionChromeHeight = sectionStartedOnPage ? 0 : metrics.getSectionChromeHeight(group.section);
+          const nextRequiredHeight = nextSectionGap + nextSectionChromeHeight + entryHeight;
+
+          currentPage.push({
+            ...entry,
+            __sectionStart: !sectionStartedOnPage,
+            __rowIndex: sectionIndexOnPage,
+          });
+          currentHeight += nextRequiredHeight;
+          sectionStartedOnPage = true;
+          sectionIndexOnPage += 1;
+        }
+      }
+
+      flushPage();
+      return pages;
+    }
+
+    function renderSection(group) {
+      const rows = group.entries.map(renderEntry).join("");
+
+      return `
+        <section class="section-block">
+          <div class="section-title">${escapeHtml(group.section || "")}</div>
+          ${renderColumns()}
+          ${rows}
+        </section>
+      `;
+    }
+
+    function renderPage(pageIndex, token) {
+      if (!payload || token !== refreshToken) {
+        return;
+      }
+
+      const pages = pageChunks(payload.entries);
+      if (!pages.length) {
+        viewerEl.style.display = "none";
+        emptyEl.style.display = "grid";
+        return;
+      }
+
+      viewerEl.style.display = "grid";
+      emptyEl.style.display = "none";
+
+      currentPage = pageIndex;
+      const pageEntries = pages[pageIndex];
+      const sectionGroups = groupBySection(pageEntries);
+      metaEl.textContent = payload.date || "";
+      entriesEl.innerHTML = `
+        ${sectionGroups.map(renderSection).join("")}
+        <div class="page-indicator">${pageIndex + 1}/${pages.length}</div>
+      `;
+    }
+
+    function scheduleRotation(token) {
+      window.clearTimeout(rotationTimer);
+      if (!payload || token !== refreshToken) {
+        return;
+      }
+
+      const totalPages = pageChunks(payload.entries).length;
+      if (totalPages <= 1) {
+        return;
+      }
+
+      rotationTimer = window.setTimeout(() => {
+        const nextPage = currentPage >= totalPages - 1 ? 0 : currentPage + 1;
+        renderPage(nextPage, token);
+        scheduleRotation(token);
+      }, rotateMs);
+    }
+
+    async function loadData() {
+      refreshToken += 1;
+      const token = refreshToken;
+      window.clearTimeout(rotationTimer);
+
+      try {
+        const response = await fetch(`${dataUrl}?t=${Date.now()}`, { cache: "no-store" });
+        const nextPayload = await response.json();
+        if (token !== refreshToken) {
+          return;
+        }
+
+        payload = {
+          ...nextPayload,
+          entries: sortEntriesBySectionAndDistance(nextPayload.entries || []),
+        };
+        currentPage = 0;
+        renderPage(currentPage, token);
+        scheduleRotation(token);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    loadData();
+    window.setInterval(loadData, refreshMs);
+    window.addEventListener("resize", () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(loadData, 150);
+    });
+  </script>
+</body>
+</html>
