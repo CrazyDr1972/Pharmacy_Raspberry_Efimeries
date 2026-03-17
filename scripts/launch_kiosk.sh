@@ -4,8 +4,20 @@ set -eu
 
 PROFILE_DIR="/home/niklyk1/pharmacy-display/.chromium-profile"
 VIEWER_URL="file:///home/niklyk1/pharmacy-display/viewer/index.html"
+LOG_FILE="/home/niklyk1/pharmacy-display/logs/kiosk-launch.log"
 
 mkdir -p "$PROFILE_DIR"
+mkdir -p "/home/niklyk1/pharmacy-display/logs"
+
+timestamp() {
+  date '+%Y-%m-%d %H:%M:%S'
+}
+
+log() {
+  printf '%s %s\n' "$(timestamp)" "$1" >>"$LOG_FILE"
+}
+
+log "launch script start"
 
 if [ -z "${DISPLAY:-}" ] && [ -S /tmp/.X11-unix/X0 ]; then
   export DISPLAY=:0
@@ -16,9 +28,12 @@ if [ -z "${XAUTHORITY:-}" ] && [ -f /home/niklyk1/.Xauthority ]; then
 fi
 
 if [ -z "${DISPLAY:-}" ] && [ -z "${WAYLAND_DISPLAY:-}" ]; then
+  log "no GUI session found"
   echo "No active GUI session found. Start the Raspberry Pi desktop first, or let autostart launch the kiosk after login." >&2
   exit 1
 fi
+
+log "using DISPLAY=${DISPLAY:-} WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-} XAUTHORITY=${XAUTHORITY:-}"
 
 /usr/bin/chromium \
   --kiosk \
@@ -36,6 +51,7 @@ fi
   --app="$VIEWER_URL" &
 
 CHROMIUM_PID=$!
+log "chromium started pid=$CHROMIUM_PID"
 
 if [ -n "${DISPLAY:-}" ] && command -v xdotool >/dev/null 2>&1; then
   sleep 3
@@ -46,4 +62,10 @@ if [ -n "${DISPLAY:-}" ] && command -v xdotool >/dev/null 2>&1; then
   fi
 fi
 
-wait "$CHROMIUM_PID"
+if wait "$CHROMIUM_PID"; then
+  EXIT_CODE=0
+else
+  EXIT_CODE=$?
+fi
+log "chromium exited code=$EXIT_CODE"
+exit "$EXIT_CODE"

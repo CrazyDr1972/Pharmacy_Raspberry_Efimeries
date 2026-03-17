@@ -1,7 +1,7 @@
 [
   {
     "name": "__RequestVerificationToken_L2ZzYQ2",
-    "value": "6c50CYGztM9ZblrXINYh7f1r5R80ybNNnmQkCEsJ5gqL9TjONpbrmyubGj9w4MF4HfSocL6somigvdh3z_zOA54DdOHAKDVO1jL3bIO3XuU1",
+    "value": "_CN3wHIWqQ1bIUT3PiQ9A77Fl8_BOfO8AhLUr5KGJxJxRmRb2syQFsDiIsf30WHZ5hoqcSc7Cnp5c6m__CSfMQlRt1tpJJGM35DS1n0mg7c1",
     "domain": "www.fsa-platforma.gr",
     "path": "/",
     "expires": -1,
@@ -11,7 +11,7 @@
   },
   {
     "name": ".AspNet.ApplicationCookie",
-    "value": "LgyYKagTfKBKwtI_kVn_YH7lqyk6hK2vhJcEdupF8E8QrVp7dq0V8okhpkP-LfanUo68Vxmuzkrsa3uqbAYv7v4ad1TilAdmcL2KfTFOgQUkrjxAek-X_XulWnbmMw4BIPPO_G5psR3iRox2mnHpGYcjjbJe9oIUW3jS8GD4OvvcXpPFGy2SUXMtxtDQDotdxz5V1trw_5hNpa4nMDglNrfIhOoWaQLDyc_GN6pBHPMsINyLccwJ4NrhmM86Aj7z6pOLseehKSP1ObpF-Fj-ULT0ROlaKVSy1g_gOpm2jWGBOuFrwuASgdfqhq3mrKTPIENYufVT0NMyluF00mYC_Em0zO5TyFqZOaRWIwCya-6brVtlKpA2ueInH2uG652bEs5QRgBzXsHhkUPrWeB99WVuBpAMKSjsS5dzq80-L3ALoH-7EQCSgdBXzWMcr4zprchx_qGFchj_nnZoPMk-dDBSO5qHi2yxj1i-nJLGqBgAWr1R2VzmYTcUlG8fZPzT",
+    "value": "78iKiDBmhZ4x-6eiZDgYWah__JbVHq-qjHbxGfGvsqZh_y4a2laFDi86bSQe-YpfDIp-NTsdkt95n_fFebnt1A_rR6SEEuNvJNvsAzWYpn2FK6xVkeCepC2cW23osoYDsjZKU5_M9pir50j00IFPNngtoBo_mMn7wwSas5C0UTzvPEeXALM3osZP9XCe-Hx04t2aMwa8QCNKYh4qYzLZ5cW2topGWhGACFG84p6IyI2dJaBWu5MrvMRSKggoOI2rB39Nb48QeFT034JeeHehS_j0PXsO_1jMUpPNoY2pma2rH9y_ObEz2f_MfHtSkgJ8cFegkJC5WWssjbR8YQYT1Yq9VBSXiApPtE88-yon_3sPzg6kSqNoo7A3fggSozTmOv5xtFyRPICTxt2yrv5s5a1pmHAARluPPjljLHcAKytfazPPKyfcRwkLMElfBrFUJuPLVss8tnOK2Vuc77RDUn-J76uwkDgqD8fZC44tK7FdmIV4EYtQ6pYFCjiToEGX",
     "domain": "www.fsa-platforma.gr",
     "path": "/",
     "expires": -1,
@@ -21,7 +21,7 @@
   },
   {
     "name": ".AspNetCore.Cookies",
-    "value": "CfDJ8IjBCdtLVK9LrUcvTfPHUWbczsKHzVRlZiTwyrUVTM-HieO6E-0LJLFA4yit5eCiny6zTnpwnAp6-9rApSaczjloV-EngcrH_SXo0E5yT-b1vCDPBuRkd1KACxtCYzW7Yk_kHtBJua6h7wOChq8J5_0i_nTA28bkhVm1_KqZFdsXewqy9t1IkPHTuCCaDc3f-yKJ0-BEc7x280fAYonkmS9jSg1pm_AJJZ3rSllK7Tmx7Ok4x6OJXtm513_O3fNcv8c42Hd48dRl5BbXkYgxqaNSPViIuztAahVO9a5GQAvBf0tna8xUXgj6zZbn36bSZl9bcu7QthefmdXLYikPZgfcEKQxPepSLG7H-Ta9WUolUtuvXQ3bhT7XSFoicaELTDNxUY4l5sPxg_bqFooUz4wWG49u5myMkx7wXI2KaiYOxcnUuzPUeF5d8f7LUNlnyrrr2coMZ0txgDclhYVCv4nevZ4ExOs6xtFxNbEBHH2GhSqWnS3SoyaxigohqWVPbQLkdB8cpopfyDT3EVW5FM-AxkN95JzpjRYCsd4tyyXg2kV2hP3SS3pcte3RxoQzLioZtHUeBqtbjIq8GCMdztQ62b7W1sW_MbNdZvWv3nAk",
+    "value": "CfDJ8IjBCdtLVK9LrUcvTfPHUWaP9W0mwaU1oMsoPg_olEV0pKRUuCRoxYlNlf8w0bt8cauoIU_b5IAFaS4bn3y14g_dhD7GVET57UxwjWH5hZyXvkZbTsxKzOJ0lyQUpKVFYkTEULFuSW7--zJ2k1z4mcsY5NiWuCNuLwQBN7S1Mja7VMCvVm6rr2o440pnCSZIDyZEtT2cA-DJHvpXWN1X75diJBHjVqfPCjjL2zS1z7NRR0OJGX82MtFaHvAXD53C8V_bXdBpJQOQ8ufiSXLUACqROLnAxHvZt5xvNXHCYA6gPa_6ArT5ir_4vOenpOwA5phLmOn-Efg3FX7ZfVrj6UCNzytt6tHceS870t3CtreToiy4qqDGvBsVl2AGUQeEaD873AWgks5m0AY1w-m6w2QEol9IKy9W0uBQ8UIjplXUzTS9gtPuGxMSQ7S5wPwK7PgN4f5CemNkznAvAevnDedpYYPUHLL7aA8KNLF-NjyHr0BtxfkeODmYKianl_x_esmcgNwT8WOAgMjzmYLtNm0hpgxa6qKUdlkByvSabn4CufY_zBh67XN-6roALLFOItkWsHmnY27Iczu1AEnMmPv9MVBuE_BWn31lPurokznU",
     "domain": "fsa-efimeries.gr",
     "path": "/",
     "expires": -1,
@@ -31,17 +31,17 @@
   },
   {
     "name": "_ga",
-    "value": "GA1.1.1406321251.1773787668",
+    "value": "GA1.1.1635015591.1773788033",
     "domain": ".fsa-efimeries.gr",
     "path": "/",
-    "expires": 1808347669.437956,
+    "expires": 1808348034.498636,
     "httpOnly": false,
     "secure": false,
     "sameSite": "Lax"
   },
   {
     "name": ".AspNetCore.Antiforgery._7w_lBqvcBI",
-    "value": "CfDJ8IjBCdtLVK9LrUcvTfPHUWbcRIzrJc5JU58Ro4aYqH7_bPwzq7GsqxInJeYd3_98Pee95JM6yWczChN-zxxsnNkpmLIHkrW14iY26krIEy2FwA6hlywBbOaFTNtqor11z1v-spIOd9kWwno61yLWamc",
+    "value": "CfDJ8IjBCdtLVK9LrUcvTfPHUWZfntk4kkz9ALPGnUpjxEvkVDgm52O5i7z4a1mY_jN6v7VlSEZRnR1jNFmud3FQXbMaORByanLsEd2hrXFcGYCAOSD7PirhI8PdmA76-foJunbcAuLcU9t5ZfRcuztEBQI",
     "domain": "fsa-efimeries.gr",
     "path": "/",
     "expires": -1,
@@ -51,10 +51,10 @@
   },
   {
     "name": "_ga_W8MT7PMKDL",
-    "value": "GS2.1.s1773787668$o1$g1$t1773787669$j59$l0$h0",
+    "value": "GS2.1.s1773788033$o1$g1$t1773788034$j59$l0$h0",
     "domain": ".fsa-efimeries.gr",
     "path": "/",
-    "expires": 1808347669.505571,
+    "expires": 1808348034.682434,
     "httpOnly": false,
     "secure": false,
     "sameSite": "Lax"
