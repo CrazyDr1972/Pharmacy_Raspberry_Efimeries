@@ -1,0 +1,14 @@
+.env
+.venv/
+.chromium-profile/
+__pycache__/
+*.py[cod]
+
+logs/
+
+data/latest.pdf
+data/latest_duties.json
+data/viewer_data.json
+data/Screenshot (604).png
+
+.DS_Store

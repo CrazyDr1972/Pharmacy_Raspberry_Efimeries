@@ -11,13 +11,12 @@ from app.config import LATEST_PDF_PATH
 
 OUTPUT_JSON_PATH = Path("/home/niklyk1/pharmacy-display/data/latest_duties.json")
 
-AREA_END = 19
+AREA_END = 17
 ADDRESS_END = 58
-NAME_END = 101
-
 SECTION_RE = re.compile(r"\d.*ΠΡΩΙ")
 PHONE_RE = re.compile(r"(?P<phone>\d{10})(?:\s+(?P<distance>.+))?$")
 DATE_RE = re.compile(r"([Α-ΩA-ZΆ-Ώα-ωά-ώ]+,\s+\d{1,2}\s+[Α-ΩA-ZΆ-Ώα-ωά-ώ]+\s+\d{4})")
+COLUMN_SPLIT_RE = re.compile(r"\s{2,}")
 
 
 def _append_field(target: dict[str, str], key: str, value: str) -> None:
@@ -28,6 +27,22 @@ def _append_field(target: dict[str, str], key: str, value: str) -> None:
         target[key] = f"{target[key]} {value}"
     else:
         target[key] = value
+
+
+def _split_entry_columns(prefix: str) -> tuple[str, str, str]:
+    padded = prefix.ljust(AREA_END)
+    area = padded[:AREA_END].strip()
+    remainder = prefix[AREA_END:].strip()
+    parts = [part.strip() for part in COLUMN_SPLIT_RE.split(remainder) if part.strip()]
+    if len(parts) >= 2:
+        return area, parts[0], " ".join(parts[1:])
+
+    padded = prefix.ljust(ADDRESS_END)
+    return (
+        area,
+        padded[AREA_END:ADDRESS_END].strip(),
+        prefix[ADDRESS_END:].strip(),
+    )
 
 
 def _parse_pdf_text(text: str) -> dict[str, object]:
@@ -66,12 +81,13 @@ def _parse_pdf_text(text: str) -> dict[str, object]:
 
         phone_match = PHONE_RE.search(line)
         if phone_match:
-            prefix = line[:phone_match.start()].ljust(NAME_END)
+            prefix = line[:phone_match.start()]
+            area, address, pharmacy = _split_entry_columns(prefix)
             current_entry = {
                 "section": current_section,
-                "area": prefix[:AREA_END].strip(),
-                "address": prefix[AREA_END:ADDRESS_END].strip(),
-                "pharmacy": prefix[ADDRESS_END:NAME_END].strip(),
+                "area": area,
+                "address": address,
+                "pharmacy": pharmacy,
                 "phone": phone_match.group("phone").strip(),
                 "distance": (phone_match.group("distance") or "").strip(),
             }
@@ -81,10 +97,15 @@ def _parse_pdf_text(text: str) -> dict[str, object]:
         if current_entry is None:
             continue
 
-        padded = line.ljust(NAME_END)
+        continuation_parts = [part.strip() for part in COLUMN_SPLIT_RE.split(line.rstrip()) if part.strip()]
+        if line[:ADDRESS_END].strip() == "" and continuation_parts:
+            _append_field(current_entry, "pharmacy", continuation_parts[-1])
+            continue
+
+        padded = line.ljust(ADDRESS_END)
         _append_field(current_entry, "area", padded[:AREA_END])
         _append_field(current_entry, "address", padded[AREA_END:ADDRESS_END])
-        _append_field(current_entry, "pharmacy", padded[ADDRESS_END:NAME_END])
+        _append_field(current_entry, "pharmacy", line[ADDRESS_END:])
 
     return {
         "date": date_line,
