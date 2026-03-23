@@ -25,6 +25,10 @@ log() {
 
 log "boot wrapper start"
 
+if [ ! -x "$PYTHON_BIN" ]; then
+  log "missing virtualenv interpreter at $PYTHON_BIN"
+fi
+
 if [ ! -f "$VIEWER_JSON" ] && [ -f "$LATEST_PDF" ]; then
   log "viewer_data.json missing, generating from latest.pdf"
   "$PYTHON_BIN" "$GENERATOR_SCRIPT" >/tmp/pharmacy-display-generate.log 2>&1 || true
