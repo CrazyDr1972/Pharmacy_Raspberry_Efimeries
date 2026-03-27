@@ -2,7 +2,8 @@
 
 set -eu
 
-PROJECT_DIR="/home/niklyk1/pharmacy-display"
+SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+PROJECT_DIR="$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)"
 LOG_DIR="$PROJECT_DIR/logs"
 BOOT_LOG="$LOG_DIR/kiosk-startup.log"
 PYTHON_BIN="$PROJECT_DIR/.venv/bin/python"

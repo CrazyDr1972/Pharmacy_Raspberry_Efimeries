@@ -2,12 +2,14 @@
 
 set -eu
 
-PROFILE_DIR="/home/niklyk1/pharmacy-display/.chromium-profile"
-VIEWER_URL="file:///home/niklyk1/pharmacy-display/viewer/index.html"
-LOG_FILE="/home/niklyk1/pharmacy-display/logs/kiosk-launch.log"
+SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+PROJECT_DIR="$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)"
+PROFILE_DIR="$PROJECT_DIR/.chromium-profile"
+VIEWER_URL="file://$PROJECT_DIR/viewer/index.html"
+LOG_FILE="$PROJECT_DIR/logs/kiosk-launch.log"
 
 mkdir -p "$PROFILE_DIR"
-mkdir -p "/home/niklyk1/pharmacy-display/logs"
+mkdir -p "$PROJECT_DIR/logs"
 
 timestamp() {
   date '+%Y-%m-%d %H:%M:%S'
@@ -23,8 +25,8 @@ if [ -z "${DISPLAY:-}" ] && [ -S /tmp/.X11-unix/X0 ]; then
   export DISPLAY=:0
 fi
 
-if [ -z "${XAUTHORITY:-}" ] && [ -f /home/niklyk1/.Xauthority ]; then
-  export XAUTHORITY=/home/niklyk1/.Xauthority
+if [ -z "${XAUTHORITY:-}" ] && [ -f "$HOME/.Xauthority" ]; then
+  export XAUTHORITY="$HOME/.Xauthority"
 fi
 
 if [ -z "${DISPLAY:-}" ] && [ -z "${WAYLAND_DISPLAY:-}" ]; then

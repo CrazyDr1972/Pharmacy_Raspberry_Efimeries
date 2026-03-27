@@ -7,9 +7,9 @@ import json
 import re
 import subprocess
 
-from app.config import LATEST_PDF_PATH
+from app.config import DATA_DIR, LATEST_PDF_PATH
 
-OUTPUT_JSON_PATH = Path("/home/niklyk1/pharmacy-display/data/latest_duties.json")
+OUTPUT_JSON_PATH = DATA_DIR / "viewer_data.json"
 
 AREA_END = 17
 ADDRESS_END = 58
