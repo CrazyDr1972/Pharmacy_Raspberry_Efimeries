@@ -248,6 +248,8 @@
     const refreshMs = 5 * 60 * 1000;
     const rotateMs = 25 * 1000;
     const dataUrl = "../data/viewer_data.json";
+    const markerUrl = "../data/viewer_refresh_marker.txt";
+    const markerPollMs = 20 * 1000;
     const entriesEl = document.getElementById("entries");
     const metaEl = document.getElementById("meta");
     const viewerEl = document.getElementById("viewer");
@@ -258,6 +260,7 @@
     let rotationTimer = null;
     let refreshToken = 0;
     let resizeTimer = null;
+    let lastMarkerValue = "";
 
     function escapeHtml(value) {
       return String(value ?? "")
@@ -530,8 +533,36 @@
       }
     }
 
+    async function pollForFreshData() {
+      try {
+        const response = await fetch(`${markerUrl}?t=${Date.now()}`, { cache: "no-store" });
+        if (!response.ok) {
+          return;
+        }
+
+        const markerValue = (await response.text()).trim();
+        if (!markerValue) {
+          return;
+        }
+
+        if (!lastMarkerValue) {
+          lastMarkerValue = markerValue;
+          return;
+        }
+
+        if (markerValue !== lastMarkerValue) {
+          lastMarkerValue = markerValue;
+          loadData();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     loadData();
     window.setInterval(loadData, refreshMs);
+    pollForFreshData();
+    window.setInterval(pollForFreshData, markerPollMs);
     window.addEventListener("resize", () => {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(loadData, 150);

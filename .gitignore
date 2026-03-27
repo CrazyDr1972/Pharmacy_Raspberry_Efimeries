@@ -9,6 +9,7 @@ logs/
 data/latest.pdf
 data/latest_duties.json
 data/viewer_data.json
+data/viewer_refresh_marker.txt
 data/Screenshot (604).png
 
 .DS_Store
